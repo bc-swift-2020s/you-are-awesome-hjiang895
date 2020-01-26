@@ -13,9 +13,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
-//    var imageNumber = 0
-//    var messageNumber = 0
-        let totalNumberOfImages = 9
+    var imageNumber = -1
+    var messageNumber = -1
+    let totalNumberOfImages = 9
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,19 +29,20 @@ class ViewController: UIViewController {
                         "Fantastic? That's you!",
                         "When the genius bar needs help, they call you",
                         "You've got the design skills of Jony Ive"]
-        var newMessage = messages[Int.random(in: 0...messages.count - 1)]
-        while messageLabel.text == newMessage {
-            print("We had a repeating message. Both the current and new image are \(newMessage)")
-            newMessage = messages[Int.random(in: 0...messages.count - 1)]
-        }
-        messageLabel.text = newMessage
+        var newMessageNumber: Int
+        repeat {
+            newMessageNumber = Int.random(in: 0...messages.count - 1)
+        } while messageNumber == newMessageNumber
+        messageNumber = newMessageNumber
+        messageLabel.text = messages[messageNumber]
         
-        var newImage = UIImage(named: "image\(Int.random(in: 0...totalNumberOfImages))")
-        while imageView.image == newImage {
-            print("We had a repeating image. Both the current and new image are \(newImage)")
-            newImage = UIImage(named: "image\(Int.random(in: 0...totalNumberOfImages))")
-        }
-        imageView.image = newImage
+        var newImageNumber: Int
+        repeat {
+            newImageNumber = Int.random(in: 0...totalNumberOfImages)
+            print("REPEAT")
+        } while imageNumber == newImageNumber
+        imageNumber = newImageNumber
+        imageView.image = UIImage(named: "image\(imageNumber)")
         
 //        messageNumber += 1
 //        if messageNumber == messages.count {
