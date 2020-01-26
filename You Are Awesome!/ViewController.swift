@@ -16,14 +16,26 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        messageLabel.text = "" 
-    }
-    @IBAction func messageButtonPressed(_ sender: UIButton) {
-        messageLabel.text = "You Are Awesome!"
-        imageView.image = UIImage(named: "image2")
         
     }
+    @IBAction func messageButtonPressed(_ sender: UIButton) {
+        let awesomeMessage = "You Are Awesome!"
+        let greatMessage = "You are Great!"
+        let bombMessage = "You Are Da Bomb!"
+        if messageLabel.text == awesomeMessage {
+            messageLabel.text = greatMessage
+            imageView.image = UIImage(named: "image0")
+        }
+        else if messageLabel.text == greatMessage {
+            messageLabel.text = bombMessage
+            imageView.image = UIImage(named: "image1")
+        }
+        else {
+            messageLabel.text = "You Are Awesome!"
+            imageView.image = UIImage(named: "image2")
+        
+        }
     
-
+    }
 }
 
