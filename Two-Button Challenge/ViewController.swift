@@ -1,8 +1,8 @@
 //
 //  ViewController.swift
-//  You Are Awesome!
+//  Two-Button Challenge
 //
-//  Created by Hannah Jiang on 1/20/20.
+//  Created by Hannah Jiang on 1/25/20.
 //  Copyright © 2020 Hannah Jiang. All rights reserved.
 //
 
@@ -11,18 +11,19 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var messageLabel: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-    @IBAction func messageButtonPressed(_ sender: UIButton) {
+
+    @IBAction func leftButtonPressed(_ sender: UIButton) {
         messageLabel.text = "You Are Awesome!"
-        imageView.image = UIImage(named: "image2")
-        
     }
     
-
+    @IBAction func rightButtonPressed(_ sender: UIButton) {
+        messageLabel.text = "You Are Great!"
+    }
+    
 }
 
