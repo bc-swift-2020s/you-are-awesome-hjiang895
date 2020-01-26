@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        messageLabel.text = "" 
     }
     @IBAction func messageButtonPressed(_ sender: UIButton) {
         messageLabel.text = "You Are Awesome!"
