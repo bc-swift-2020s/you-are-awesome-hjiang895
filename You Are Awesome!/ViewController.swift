@@ -15,13 +15,38 @@ class ViewController: UIViewController {
     
     var imageNumber = -1
     var messageNumber = -1
+    var soundNumber = -1
     let totalNumberOfImages = 9
+    let totalNumberofSounds = 4
     var audioPlayer = AVAudioPlayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+    }
+    
+    func playSound(name: String){
+        if let sound = NSDataAsset (name: name) {
+                   do {
+                       try audioPlayer = AVAudioPlayer (data: sound.data)
+                       audioPlayer.play()
+                   }catch {
+                       print("ERROR: \(error.localizedDescription) could not initalize AVAudioPlayer object")
+                   }
+               }
+                   else {
+                       print("ERROR: could not read data from file")
+                   }
+               
+    }
+    
+    func nonRepeatingRandom(originalNumber: Int, upperLimit: Int) -> Int{
+        var newNumber: Int
+        repeat {
+            newNumber = Int.random(in: 0...upperLimit)
+        } while originalNumber == newNumber
+        return newNumber
     }
     @IBAction func messageButtonPressed(_ sender: UIButton) {
         let messages = ["You Are Awesome!",
@@ -30,32 +55,15 @@ class ViewController: UIViewController {
                         "Fantastic? That's you!",
                         "When the genius bar needs help, they call you",
                         "You've got the design skills of Jony Ive"]
-        var newMessageNumber: Int
-        repeat {
-            newMessageNumber = Int.random(in: 0...messages.count - 1)
-        } while messageNumber == newMessageNumber
-        messageNumber = newMessageNumber
+        
+        messageNumber = nonRepeatingRandom(originalNumber: messageNumber, upperLimit: messages.count - 1)
         messageLabel.text = messages[messageNumber]
         
-        var newImageNumber: Int
-        repeat {
-            newImageNumber = Int.random(in: 0...totalNumberOfImages)
-            print("REPEAT")
-        } while imageNumber == newImageNumber
-        imageNumber = newImageNumber
+        imageNumber = nonRepeatingRandom(originalNumber: imageNumber, upperLimit: totalNumberOfImages - 1)
         imageView.image = UIImage(named: "image\(imageNumber)")
         
-        if let sound = NSDataAsset (name: "sound0") {
-            do {
-                try audioPlayer = AVAudioPlayer (data: sound.data)
-                audioPlayer.play()
-            }catch {
-                print("ERROR: \(error.localizedDescription) could not initalize AVAudioPlayer object")
-            }
-        }
-            else {
-                print("ERROR: could not read data from file")
-            }
+        soundNumber = nonRepeatingRandom(originalNumber: soundNumber, upperLimit: totalNumberofSounds - 1)
+        playSound(name: "sound\(soundNumber)")
         
         
 //        messageNumber += 1
